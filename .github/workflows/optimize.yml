@@ -14,17 +14,20 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
 
     steps:
-    - name: Set Up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
+    - name: Check Out Code
+      uses: actions/checkout@v3
 
     - name: Debug Directory
       run: |
         echo "Current directory:"
         pwd
-        echo "Files in the directory:"
+        echo "Contents of current directory:"
         ls -al
+
+    - name: Set Up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
 
     - name: Install Dependencies
       run: |
