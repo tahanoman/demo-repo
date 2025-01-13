@@ -1,3 +1,33 @@
-- name: Clear Cache (Optional Debug Step)
-  run: |
-    rm -rf ~/.cache/pip
+name: Matrix Build for Python Versions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: 
+          - "3.7"
+          - "3.8"
+          
+    steps:
+    - name: Set Up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Debug Python Version
+      run: python --version
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Tests
+      run: pytest
