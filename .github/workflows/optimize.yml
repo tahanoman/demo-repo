@@ -19,12 +19,8 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Show Current Directory and Files
-      run: |
-        echo "Current directory:"
-        pwd
-        echo "Files in directory:"
-        ls -al
+    - name: Debug Python Version
+      run: python --version
 
     - name: Install Dependencies
       run: |
